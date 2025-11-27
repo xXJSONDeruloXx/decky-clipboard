@@ -131,41 +131,55 @@ function ClipboardButton({ entry, appendCommand, onEdit, onDelete }: ClipboardBu
   return (
     <PanelSectionRow>
       <Focusable
-        style={{ display: "flex", alignItems: "center", gap: "8px", width: "100%" }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          width: "100%",
+          padding: "0",
+          marginTop: "8px"
+        }}
+        flow-children="horizontal"
         onSecondaryActionDescription="Options"
         onSecondaryButton={(evt) => handleContextMenu(evt as unknown as MouseEvent)}
       >
-        <ButtonItem
-          layout="below"
+        <DialogButton
+          style={{
+            height: "40px",
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "10px",
+            minWidth: "0",
+          }}
           onClick={copyToClipboard}
           disabled={isLoading || showSuccess}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            {showSuccess ? (
-              <FaCheck style={{ color: "#4CAF50" }} />
-            ) : null}
-            <div style={{
-              color: showSuccess ? "#4CAF50" : "inherit",
-              fontWeight: showSuccess ? "bold" : "normal"
-            }}>
-              {showSuccess ? "Copied!" : isLoading ? "Copying..." : truncateName(entry.name)}
-            </div>
-          </div>
-        </ButtonItem>
+          {showSuccess ? (
+            <span style={{ color: "#4CAF50", fontWeight: "bold" }}>
+              <FaCheck style={{ marginRight: "8px" }} />
+              Copied!
+            </span>
+          ) : (
+            <span>{isLoading ? "Copying..." : truncateName(entry.name)}</span>
+          )}
+        </DialogButton>
         <DialogButton
-          style={{ minWidth: "40px", padding: "10px" }}
+          style={{
+            height: "40px",
+            width: "40px",
+            minWidth: "40px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "10px",
+          }}
           onClick={(e) => handleContextMenu(e as unknown as MouseEvent)}
         >
-          <FaPencilAlt />
+          <FaPencilAlt size={16} />
         </DialogButton>
       </Focusable>
-      <style>{`
-        @keyframes pulse {
-          0% { opacity: 0.7; }
-          50% { opacity: 1; }
-          100% { opacity: 0.7; }
-        }
-      `}</style>
     </PanelSectionRow>
   );
 }
