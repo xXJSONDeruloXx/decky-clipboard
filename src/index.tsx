@@ -2,7 +2,8 @@ import {
   ButtonItem,
   PanelSection,
   PanelSectionRow,
-  staticClasses
+  staticClasses,
+  ToggleField
 } from "@decky/ui";
 import {
   definePlugin,
@@ -14,9 +15,10 @@ import { FaClipboard, FaCheck } from "react-icons/fa";
 interface ClipboardButtonProps {
   command: string;
   buttonText: string;
+  appendCommand: boolean;
 }
 
-function ClipboardButton({ command, buttonText }: ClipboardButtonProps) {
+function ClipboardButton({ command, buttonText, appendCommand }: ClipboardButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -36,7 +38,7 @@ function ClipboardButton({ command, buttonText }: ClipboardButtonProps) {
 
     setIsLoading(true);
     try {
-      const text = command;
+      const text = appendCommand ? `${command} %command%` : command;
 
       // Use the proven input simulation method for gaming mode
       const tempInput = document.createElement('input');
@@ -121,11 +123,22 @@ function ClipboardButton({ command, buttonText }: ClipboardButtonProps) {
 }
 
 function Content() {
+  const [appendCommand, setAppendCommand] = useState(true);
+
   return (
     <PanelSection title="Clipboard Commands">
+      <PanelSectionRow>
+        <ToggleField
+          label="Append %command%"
+          description="When enabled, appends %command% to the clipboard entry"
+          checked={appendCommand}
+          onChange={(checked) => setAppendCommand(checked)}
+        />
+      </PanelSectionRow>
       <ClipboardButton
-        command="SteamDeck=0 %command%"
+        command="SteamDeck=0"
         buttonText="SteamDeck=0"
+        appendCommand={appendCommand}
       />
     </PanelSection>
   );
