@@ -19,13 +19,19 @@ import {
   toaster
 } from "@decky/api";
 import { useState, useEffect } from "react";
-import { FaClipboard, FaCheck, FaPlus, FaEllipsisH } from "react-icons/fa";
+import { FaClipboard, FaCheck, FaPlus, FaPencilAlt } from "react-icons/fa";
 
 // Backend API calls
 const getEntries = callable<[], ClipboardEntry[]>("get_entries");
 const addEntry = callable<[name: string, command: string], ClipboardEntry>("add_entry");
 const updateEntry = callable<[entryId: string, name: string, command: string], ClipboardEntry | null>("update_entry");
 const deleteEntry = callable<[entryId: string], boolean>("delete_entry");
+
+// Helper to truncate long names
+const truncateName = (name: string, maxLength: number = 18): string => {
+  if (name.length <= maxLength) return name;
+  return name.slice(0, maxLength - 1) + "…";
+};
 
 interface ClipboardEntry {
   id: string;
@@ -137,16 +143,12 @@ function ClipboardButton({ entry, appendCommand, onEdit, onDelete }: ClipboardBu
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             {showSuccess ? (
               <FaCheck style={{ color: "#4CAF50" }} />
-            ) : isLoading ? (
-              <FaClipboard style={{ animation: "pulse 1s ease-in-out infinite", opacity: 0.7 }} />
-            ) : (
-              <FaClipboard />
-            )}
+            ) : null}
             <div style={{
               color: showSuccess ? "#4CAF50" : "inherit",
               fontWeight: showSuccess ? "bold" : "normal"
             }}>
-              {showSuccess ? "Copied to clipboard" : isLoading ? "Copying..." : entry.name}
+              {showSuccess ? "Copied!" : isLoading ? "Copying..." : truncateName(entry.name)}
             </div>
           </div>
         </ButtonItem>
@@ -154,7 +156,7 @@ function ClipboardButton({ entry, appendCommand, onEdit, onDelete }: ClipboardBu
           style={{ minWidth: "40px", padding: "10px" }}
           onClick={(e) => handleContextMenu(e as unknown as MouseEvent)}
         >
-          <FaEllipsisH />
+          <FaPencilAlt />
         </DialogButton>
       </Focusable>
       <style>{`
@@ -176,17 +178,19 @@ interface EntryModalProps {
 }
 
 function EntryModal({ closeModal, entry, onSave }: EntryModalProps) {
-  const [name, setName] = useState(entry?.name || "");
   const [command, setCommand] = useState(entry?.command || "");
+  const [name, setName] = useState(entry?.name || "");
 
   const handleSave = () => {
-    if (name.trim() && command.trim()) {
-      onSave(name.trim(), command.trim());
+    if (command.trim()) {
+      // If name is empty, use command as the name
+      const finalName = name.trim() || command.trim();
+      onSave(finalName, command.trim());
       closeModal?.();
     } else {
       toaster.toast({
         title: "Validation Error",
-        body: "Both name and command are required"
+        body: "Command is required"
       });
     }
   };
@@ -201,16 +205,16 @@ function EntryModal({ closeModal, entry, onSave }: EntryModalProps) {
     >
       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
         <TextField
-          label="Name"
-          description="Display name for the clipboard entry"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <TextField
           label="Command"
           description="The command/text to copy (without %command%)"
           value={command}
           onChange={(e) => setCommand(e.target.value)}
+        />
+        <TextField
+          label="Name (optional)"
+          description="Display name - defaults to command if left blank"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
     </ConfirmModal>
