@@ -7,6 +7,13 @@ import json
 
 SETTINGS_FILE = "clipboard_entries.json"
 
+DEFAULT_ENTRIES = [
+    {"id": "1", "name": "SteamDeck=0", "command": "SteamDeck=0"},
+    {"id": "2", "name": "FSR4", "command": "PROTON_FSR4_UPGRADE=1"},
+    {"id": "3", "name": "RDNA3-FSR4", "command": "PROTON_FSR4_RDNA3_UPGRADE=1"},
+    {"id": "4", "name": "FGMOD FSR4", "command": "PROTON_FSR4_UPGRADE=1 ~/fgmod/fgmod"}
+]
+
 class Plugin:
     entries = []
     
@@ -24,11 +31,7 @@ class Plugin:
                 self.entries = []
         else:
             # Default entries
-            self.entries = [
-                {"id": "1", "name": "SteamDeck=0", "command": "SteamDeck=0"},
-                {"id": "2", "name": "FSR4", "command": "PROTON_FSR4_UPGRADE=1"},
-                {"id": "3", "name": "RDNA3-FSR4", "command": "PROTON_FSR4_RDNA3_UPGRADE=1"}
-            ]
+            self.entries = [entry.copy() for entry in DEFAULT_ENTRIES]
             self._save_entries()
     
     def _save_entries(self):
@@ -75,6 +78,11 @@ class Plugin:
         self.entries = [e for e in self.entries if e.get("id") != entry_id]
         self._save_entries()
         return True
+    
+    async def reset_to_defaults(self):
+        self.entries = [entry.copy() for entry in DEFAULT_ENTRIES]
+        self._save_entries()
+        return self.entries
 
     # Asyncio-compatible long-running code, executed in a task when the plugin is loaded
     async def _main(self):

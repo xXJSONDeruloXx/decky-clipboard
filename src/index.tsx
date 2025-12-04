@@ -19,13 +19,14 @@ import {
   toaster
 } from "@decky/api";
 import { useState, useEffect } from "react";
-import { FaClipboard, FaCheck, FaPlus, FaPencilAlt } from "react-icons/fa";
+import { FaClipboard, FaCheck, FaPlus, FaPencilAlt, FaUndo } from "react-icons/fa";
 
 // Backend API calls
 const getEntries = callable<[], ClipboardEntry[]>("get_entries");
 const addEntry = callable<[name: string, command: string], ClipboardEntry>("add_entry");
 const updateEntry = callable<[entryId: string, name: string, command: string], ClipboardEntry | null>("update_entry");
 const deleteEntry = callable<[entryId: string], boolean>("delete_entry");
+const resetToDefaults = callable<[], ClipboardEntry[]>("reset_to_defaults");
 
 // Helper to truncate long names
 const truncateName = (name: string, maxLength: number = 18): string => {
@@ -333,6 +334,33 @@ function Content() {
     );
   };
 
+  const handleResetToDefaults = () => {
+    showModal(
+      <ConfirmModal
+        strTitle="Reset to Defaults"
+        strDescription="Are you sure you want to reset all entries to defaults? This will delete all your custom entries."
+        strOKButtonText="Reset"
+        strCancelButtonText="Cancel"
+        bDestructiveWarning={true}
+        onOK={async () => {
+          try {
+            await resetToDefaults();
+            await loadEntries();
+            toaster.toast({
+              title: "Success",
+              body: "Entries reset to defaults"
+            });
+          } catch (error) {
+            toaster.toast({
+              title: "Error",
+              body: "Failed to reset entries"
+            });
+          }
+        }}
+      />
+    );
+  };
+
   return (
     <PanelSection title="Clipboard Commands">
       <PanelSectionRow>
@@ -370,6 +398,18 @@ function Content() {
           <div style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "center" }}>
             <FaPlus />
             <span>Add Entry</span>
+          </div>
+        </ButtonItem>
+      </PanelSectionRow>
+
+      <PanelSectionRow>
+        <ButtonItem
+          layout="below"
+          onClick={handleResetToDefaults}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "center", color: "#f44336" }}>
+            <FaUndo />
+            <span>Reset to Defaults</span>
           </div>
         </ButtonItem>
       </PanelSectionRow>
