@@ -23,9 +23,11 @@ class Plugin:
                 decky.logger.error(f"Failed to load entries: {e}")
                 self.entries = []
         else:
-            # Default entry
+            # Default entries
             self.entries = [
-                {"id": "1", "name": "SteamDeck=0", "command": "SteamDeck=0"}
+                {"id": "1", "name": "SteamDeck=0", "command": "SteamDeck=0"},
+                {"id": "2", "name": "FSR4", "command": "PROTON_FSR4_UPGRADE=1"},
+                {"id": "3", "name": "RDNA3-FSR4", "command": "PROTON_FSR4_RDNA3_UPGRADE=1"}
             ]
             self._save_entries()
     
