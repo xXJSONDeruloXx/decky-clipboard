@@ -423,6 +423,7 @@ export default definePlugin(() => {
   return {
     name: "Decky Clipboard",
     titleView: <div className={staticClasses.Title}>Decky Clipboard</div>,
+    alwaysRender: true,
     content: <Content />,
     icon: <FaClipboard />,
     onDismount() {
