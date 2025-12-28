@@ -1,6 +1,7 @@
 {
   "name": "Decky Clipboard",
   "author": "xXJSONDeruloXx",
+  "flags": ["debug"],
   "api_version": 1,
   "publish": {
     "tags": ["clipboard", "utility"],
