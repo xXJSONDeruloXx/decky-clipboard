@@ -27,7 +27,6 @@ Or in VS Code, run the `setup` → `build` → `deploy` tasks.
 ```
 src/index.tsx    # Frontend React UI
 main.py          # Python backend (entry persistence)
-defaults/        # Default clipboard entries
 ```
 
 ## License
