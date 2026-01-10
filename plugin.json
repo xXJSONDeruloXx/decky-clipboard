@@ -1,11 +1,11 @@
 {
   "name": "Snippets",
   "author": "xXJSONDeruloXx",
-  "flags": ["debug"],
+  "flags": [],
   "api_version": 1,
   "publish": {
     "tags": ["snippets", "utility", "clipboard"],
     "description": "Save and paste custom launch arguments in Steam Deck game mode.",
-    "image": "https://opengraph.githubassets.com/1/SteamDeckHomebrew/PluginLoader"
+    "image": "https://raw.githubusercontent.com/xXJSONDeruloXx/snippets/refs/heads/main/assets/preview.png"
   }
 }
