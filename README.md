@@ -1,8 +1,8 @@
 # Snippets
 
-A [Decky Loader](https://github.com/SteamDeckHomebrew/decky-loader) plugin that lets you save and use custom text snippets in Steam Deck game mode.
+A Decky plugin that lets you save and use custom text snippets in Steam Deck game mode.
 
-![Screenshot of Snippets](assets/screenshot.png)
+![Screenshot of Snippets](assets/preview.png)
 
 ## Features
 
@@ -21,13 +21,6 @@ pnpm run build
 ```
 
 Or in VS Code, run the `setup` → `build` → `deploy` tasks.
-
-## Project Structure
-
-```
-src/index.tsx    # Frontend React UI
-main.py          # Python backend (entry persistence)
-```
 
 ## License
 
