@@ -1,4 +1,4 @@
-# Decky Clipboard justfile
+# Snippets justfile
 
 # Default to listing available commands
 default:
@@ -10,7 +10,7 @@ build:
 
 # Deploy to console (scp to bazzite)
 deploy:
-    scp "out/Decky Clipboard.zip" bazzite@192.168.1.100:~/Downloads/
+    scp "out/Snippets.zip" bazzite@192.168.1.100:~/Downloads/
 
 # Build and deploy
 all: build deploy

@@ -418,16 +418,16 @@ function Content() {
 }
 
 export default definePlugin(() => {
-  console.log("Decky Clipboard plugin initializing");
+  console.log("Snippets plugin initializing");
 
   return {
-    name: "Decky Clipboard",
-    titleView: <div className={staticClasses.Title}>Decky Clipboard</div>,
+    name: "Snippets",
+    titleView: <div className={staticClasses.Title}>Snippets</div>,
     alwaysRender: true,
     content: <Content />,
     icon: <FaClipboard />,
     onDismount() {
-      console.log("Decky Clipboard plugin unloading");
+      console.log("Snippets plugin unloading");
     },
   };
 });

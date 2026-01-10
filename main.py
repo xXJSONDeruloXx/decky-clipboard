@@ -9,9 +9,9 @@ SETTINGS_FILE = "clipboard_entries.json"
 
 DEFAULT_ENTRIES = [
     {"id": "1", "name": "SteamDeck=0", "command": "SteamDeck=0"},
-    {"id": "2", "name": "FSR4", "command": "PROTON_FSR4_UPGRADE=1"},
-    {"id": "3", "name": "RDNA3-FSR4", "command": "PROTON_FSR4_RDNA3_UPGRADE=1"},
-    {"id": "4", "name": "FGMOD FSR4", "command": "PROTON_FSR4_UPGRADE=1 ~/fgmod/fgmod"}
+    # {"id": "2", "name": "FSR4", "command": "PROTON_FSR4_UPGRADE=1"},
+    # {"id": "3", "name": "RDNA3-FSR4", "command": "PROTON_FSR4_RDNA3_UPGRADE=1"},
+    # {"id": "4", "name": "FGMOD FSR4", "command": "PROTON_FSR4_UPGRADE=1 ~/fgmod/fgmod"}
 ]
 
 class Plugin:
@@ -86,13 +86,13 @@ class Plugin:
 
     # Asyncio-compatible long-running code, executed in a task when the plugin is loaded
     async def _main(self):
-        decky.logger.info("Decky Clipboard plugin loaded")
+        decky.logger.info("Snippets plugin loaded")
         self._load_entries()
 
     # Function called first during the unload process
     async def _unload(self):
-        decky.logger.info("Decky Clipboard plugin unloaded")
+        decky.logger.info("Snippets plugin unloaded")
 
     # Function called after `_unload` during uninstall
     async def _uninstall(self):
-        decky.logger.info("Decky Clipboard plugin uninstalled")
+        decky.logger.info("Snippets plugin uninstalled")

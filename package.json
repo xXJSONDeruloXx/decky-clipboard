@@ -1,7 +1,7 @@
 {
-  "name": "decky-clipboard",
+  "name": "snippets",
   "version": "1.0.0",
-  "description": "Copy launch commands to the clipboard in Steam Deck game mode.",
+  "description": "Save and use custom text snippets in Steam Deck game mode.",
   "type": "module",
   "scripts": {
     "build": "rollup -c",
@@ -10,20 +10,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xXJSONDeruloXx/decky-clipboard.git"
+    "url": "git+https://github.com/xXJSONDeruloXx/snippets.git"
   },
   "keywords": [
     "decky",
     "plugin",
     "steam-deck",
-    "clipboard"
+    "snippets"
   ],
   "author": "xXJSONDeruloXx",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/xXJSONDeruloXx/decky-clipboard/issues"
+    "url": "https://github.com/xXJSONDeruloXx/snippets/issues"
   },
-  "homepage": "https://github.com/xXJSONDeruloXx/decky-clipboard#readme",
+  "homepage": "https://github.com/xXJSONDeruloXx/snippets#readme",
   "devDependencies": {
     "@decky/rollup": "^1.0.2",
     "@decky/ui": "^4.11.0",

@@ -1,8 +1,8 @@
-# Decky Clipboard
+# Snippets
 
-A [Decky Loader](https://github.com/SteamDeckHomebrew/decky-loader) plugin that lets you save and copy custom commands to the clipboard in Steam Deck game mode.
+A [Decky Loader](https://github.com/SteamDeckHomebrew/decky-loader) plugin that lets you save and use custom text snippets in Steam Deck game mode.
 
-![Screenshot of Decky Clipboard](assets/screenshot.png)
+![Screenshot of Snippets](assets/screenshot.png)
 
 ## Features
 

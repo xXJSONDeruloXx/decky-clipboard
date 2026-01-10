@@ -1,11 +1,11 @@
 {
-  "name": "Decky Clipboard",
+  "name": "Snippets",
   "author": "xXJSONDeruloXx",
   "flags": ["debug"],
   "api_version": 1,
   "publish": {
-    "tags": ["clipboard", "utility"],
-    "description": "Utility plugin to copy launch commands to clipboard in game mode.",
+    "tags": ["snippets", "utility", "clipboard"],
+    "description": "Save and paste custom launch arguments in Steam Deck game mode.",
     "image": "https://opengraph.githubassets.com/1/SteamDeckHomebrew/PluginLoader"
   }
 }
